@@ -5,11 +5,11 @@ async function Page() {
     const user = await currentUser();
 
     const userInfo = {
-        _id: '',
-        username: '',
-        name: '',
+        _id: user?.id,
+        username: user?.username,
+        name: user?.firstName,
         bio: '',
-        image: '',
+        image: user?.imageUrl,
     };
 
     const userData = {
