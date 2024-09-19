@@ -35,7 +35,7 @@ interface Props {
     btnTitle: string;
 }
 
-const AccountProfile = ({user, btnTitle}:Props) => {
+const AccountProfile = ({user, btnTitle}: Props) => {
     const [files, setFiles] = useState<File[]>([]);
     const { startUpload } = useUploadThing("media");
     const router = useRouter();

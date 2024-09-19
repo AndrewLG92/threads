@@ -18,24 +18,24 @@ import { Textarea } from '@/components/ui/textarea';
 import { usePathname, useRouter } from 'next/navigation';
 import { createThread } from '@/lib/actions/thread.actions';
 
-interface Props {
-    user: {
-        id: string;
-        objectId: string;
-        username: string;
-        name: string;
-        bio: string;
-        image: string;
-    };
-    btnTitle: string;
-}
+// interface Props {
+//     user: {
+//         id: string;
+//         objectId: string;
+//         username: string;
+//         name: string;
+//         bio: string;
+//         image: string;
+//     };
+//     btnTitle: string;
+// }
 
 function PostThread({userId}: {userId: string}) {
     const router = useRouter();
     const pathname = usePathname();
 
     const form = useForm({
-        resolver: zodResolver(ThreadValidation) ,
+        resolver: zodResolver(ThreadValidation),
         defaultValues: {
             thread: '',
             accountId: userId,
@@ -43,6 +43,8 @@ function PostThread({userId}: {userId: string}) {
     });
 
     const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
+        console.log(values);
+        
         await createThread({ 
             text: values.thread,
             author: userId,
@@ -51,6 +53,7 @@ function PostThread({userId}: {userId: string}) {
         });
 
         router.push("/");
+       
     };
 
     return (
@@ -76,10 +79,7 @@ function PostThread({userId}: {userId: string}) {
                         </FormItem>
                     )}
                 />
-                <Button
-                    type="submit"
-                    className="bg-primary-500"
-                >
+                <Button type="submit" className="bg-primary-500">
                     Post Thread
                 </Button>
             </form>
